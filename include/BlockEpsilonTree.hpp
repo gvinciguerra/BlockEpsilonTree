@@ -438,7 +438,8 @@ public:
         //     }
         //     return input_shift + j - start;
 
-        return input_shift + leaves_rank(x_remapped - leaves_shift) - block * block_size;
+        auto leaves_rank_val = x_remapped <= leaves_shift ? 0 : leaves_rank(x_remapped - leaves_shift);
+        return input_shift + leaves_rank_val - block * block_size;
     }
 
     uint64_t select(size_t i) const {
